@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+### Large / optional game asset folders
+# These folders often contain binary art/audio/models and can exceed GitHub's file size
+# limits. Ignore them here if you don't want to publish the raw assets.
+assets/
+images/
+inventory/
+inventory_items/
+
+# If you keep some smaller assets checked in, add negation rules for specific files or
+# subfolders you want to track, e.g.:
+# !assets/essential_sprites/
+
+# Recommendation: use Git LFS to store large binary assets without losing history.
+# See .gitattributes for an example of file types to track with LFS.

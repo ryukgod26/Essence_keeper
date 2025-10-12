@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://l8py0qbyc5ko"]
+
+[ext_resource type="Script" uid="uid://0fur8xuqo568" path="res://Scripts/options.gd" id="1_prnvy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prnvy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_prnvy"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_4tmxy"]
+events = [SubResource("InputEventKey_prnvy")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tmxy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyyw6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ww8vx"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kftxf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_663nc"]
+bg_color = Color(0.060530342, 0.060530365, 0.060530297, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.11119684, 0.11119687, 0.11119675, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_prnvy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HScrollBar" type="HScrollBar" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Mute" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_prnvy")
+shortcut = SubResource("Shortcut_4tmxy")
+text = "MUTE (M KEY)"
+alignment = 1
+
+[node name="Resolutionlbl" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4tmxy")
+text = "RESOLUTION"
+horizontal_alignment = 1
+
+[node name="Resolution" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qyyw6")
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "1600x900"
+popup/item_0/id = 0
+popup/item_1/text = "1080x720"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
+
+[node name="Modelbl" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ww8vx")
+text = "Mode"
+horizontal_alignment = 1
+
+[node name="Mode" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_kftxf")
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Full Screen"
+popup/item_1/id = 1
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_663nc")
+text = "BACK"
+
+[connection signal="value_changed" from="VBoxContainer/HScrollBar" to="." method="_on_h_scroll_bar_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Mute" to="." method="_on_mute_toggled"]
+[connection signal="item_selected" from="VBoxContainer/Resolution" to="." method="_on_resolution_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Mode" to="." method="_on_mode_item_selected"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

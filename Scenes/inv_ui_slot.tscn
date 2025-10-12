@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://s3mive8py822"]
+
+[ext_resource type="Texture2D" uid="uid://cu05d6h48703b" path="res://assets/Inventory/Sample-InventorySlotsSet.png" id="1_3fq4t"]
+
+[node name="inv_ui_slot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3fq4t")
+region_enabled = true
+region_rect = Rect2(-0.26341343, 78.70528, 24.564953, 24.573532)

@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://bjdbpy2grc5xe"]
+
+[ext_resource type="Texture2D" uid="uid://b16oogng0k26w" path="res://assets/Player/free-wizard-sprite-sheets-pixel-art/Fire vizard/Charge.png" id="1_xi7wk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi7wk"]
+size = Vector2(20, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mxqg"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ne4qj"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcgvv"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpagb"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3yyx"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsbbf"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgrri"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwcvb"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_311e2"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nddwj"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhvta"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43ery"]
+atlas = ExtResource("1_xi7wk")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v4dsn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mxqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ne4qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcgvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpagb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3yyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsbbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgrri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwcvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_311e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nddwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhvta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43ery")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Fireball" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, -2)
+shape = SubResource("RectangleShape2D_xi7wk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v4dsn")
+autoplay = "default"
+frame_progress = 0.14991221

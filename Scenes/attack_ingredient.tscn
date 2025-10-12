@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://5bb4wr7faeye"]
+
+[ext_resource type="Texture2D" uid="uid://smkna3y8v6jc" path="res://assets/Magic_potions/magical-potions-items-tileset.png" id="1_bn81b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_288n6"]
+size = Vector2(14, 9)
+
+[node name="attack_ingredient" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_288n6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bn81b")
+region_enabled = true
+region_rect = Rect2(144.98558, 5.990038, 14.012329, 9.033969)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://yx06u8vggtgr"]
+
+[ext_resource type="Script" uid="uid://b7kcqkc7y44yv" path="res://Scripts/inv_ui.gd" id="1_cshhv"]
+[ext_resource type="Texture2D" uid="uid://cu05d6h48703b" path="res://assets/Inventory/Sample-InventorySlotsSet.png" id="2_xsetr"]
+
+[node name="Inv_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cshhv")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_xsetr")
+region_rect = Rect2(29.18309, -0.32302284, 72.96697, 75.83466)
+patch_margin_left = 3
+patch_margin_top = 1
+patch_margin_right = 3
+patch_margin_bottom = 1

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdnv63ia4g07j"]
+
+[sub_resource type="TileSet" id="TileSet_dnh6j"]
+
+[sub_resource type="TileSet" id="TileSet_v3rpw"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 3
+
+[node name="level2" type="Node2D"]
+
+[node name="Background" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_dnh6j")
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_v3rpw")

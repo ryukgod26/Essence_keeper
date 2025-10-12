@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://pgbcgk8ijxu"]
+
+[ext_resource type="Script" uid="uid://cjv1exl71eik0" path="res://Scripts/level_selector.gd" id="1_22lal"]
+[ext_resource type="Texture2D" uid="uid://1vugsivm4ti2" path="res://assets/main_menu/pexels-neale-lasalle-197020-631477.jpg" id="2_x3xpc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22lal"]
+texture = ExtResource("2_x3xpc")
+
+[node name="level_selector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_22lal")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_22lal")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -269.75
+offset_top = -179.75
+offset_right = 269.75
+offset_bottom = 179.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="level1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "LEVEL 1"
+
+[node name="level2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "LEVEL 2"
+
+[node name="level3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "LEVEL 3"
+
+[node name="BACK" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "BACK"
+
+[connection signal="pressed" from="VBoxContainer/level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/BACK" to="." method="_on_back_pressed"]
