@@ -443,7 +443,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dq4dp")
 }],
-"loop": true,
+"loop": false,
 "name": &"Flame_jet",
 "speed": 5.0
 }, {
@@ -603,7 +603,7 @@ shape = SubResource("CapsuleShape2D_iceyr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f60y1")
-animation = &"Attack1"
+animation = &"Flame_jet"
 autoplay = "Idle"
 
 [node name="Inv_UI" parent="." instance=ExtResource("12_8qgqc")]

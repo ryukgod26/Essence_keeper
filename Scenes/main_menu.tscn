@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://da6ts73lf2l4b"]
+[gd_scene load_steps=7 format=3 uid="uid://da6ts73lf2l4b"]
 
 [ext_resource type="Script" uid="uid://c8y6ta15rna4s" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://co88lrfihfumk" path="res://assets/main_menu/WhatsApp Image 2025-10-13 at 06.50.28_7b4d69e0.jpg" id="2_48xlc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28flt"]
+texture = ExtResource("2_48xlc")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erv1k"]
 bg_color = Color(0.03839716, 0.038397174, 0.038397126, 1)

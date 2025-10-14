@@ -47,12 +47,14 @@ text = "LEVEL 1"
 [node name="level2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "LEVEL 2"
+disabled = true
+text = "LEVEL 2 (In Development)"
 
 [node name="level3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "LEVEL 3"
+disabled = true
+text = "LEVEL 3 (In Development)"
 
 [node name="BACK" type="Button" parent="VBoxContainer"]
 layout_mode = 2

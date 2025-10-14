@@ -39,7 +39,8 @@ func _physics_process(delta: float) -> void:
 		if charge_time >= HELD_ATTACK_THRESHOLD:
 			heavy_attack()
 			held_attack_fired = true
-			
+	if Input.is_action_just_pressed("Special_attack") and is_on_floor() and can_attack:
+		flame_jet()
 	var direction := Input.get_axis("MOVE_LEFT", "MOVE_RIGHT")
 	if direction > 0 and is_on_floor() and not attacking:
 		velocity.x = 0
@@ -89,14 +90,31 @@ func check_health():
 		alive= false
 		animated_sprite.play("Death")
 		
+		
 func player():
 	pass
 
+func flame_jet():
+	animated_sprite.play("Flame_jet")
+	attacking = true
+	Global.player_current_attack = true
+	can_attack = false
+	player_attack_timer.start()
+
+func fireball():
+	animated_sprite.play("Fireball")
+	attacking = true
+	Global.player_current_attack = true
+	can_attack = false
+	player_attack_timer.start()
+
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.animation == 'Attack1' or animated_sprite.animation == 'Attack2':
+	if animated_sprite.animation == 'Attack1' or animated_sprite.animation == 'Attack2' or animated_sprite.animation == 'Flame_jet':
 		attacking = false
-
+		Global.player_current_attack = false
+	if animated_sprite.animation == 'Death':
+		get_tree().reload_current_scene()
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.has_method('enemy'):

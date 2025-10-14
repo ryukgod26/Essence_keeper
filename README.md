@@ -1,152 +1,106 @@
-<a id="readme-top"></a>
 
-<!-- SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+# Magic Game (WIP)
 
-<!-- HEADER -->
-<br />
-<div align="center">
-	<a href="https://github.com/BudzioT/Godot_Super-Wakatime">
-		<img src="https://cloud-bo1ln2br1-hack-club-bot.vercel.app/0godotwaka22.png"  alt="Godot Wakatime"/>
-	</a>
-	<h3 align="center"> Godot Super Wakatime </h3>
-	<p align="center">
-		Tool to measure time spent in loved by many people game engine - Godot
-		<br />
-		Officially approved to use in events created by Hack Club
-		<br />
-		<br />
-		<a href="https://godotengine.org/asset-library/asset/3484">Get from Asset Lib</a>
-		·
-		<a href="https://youtu.be/rqAc-YdVXyM">View Demo</a>
-		·
-		<a href="https://github.com/BudzioT/Godot_Super-Wakatime/issues/new">Report Bug / Request Feature</a>
-	</p>
-</div>
+> A small pixel-art action platformer built in Godot. Fast melee combat, charge attacks, and elemental specials.
 
-<!-- CONTENTS -->
-<details>
-	<summary>Table of Contents</summary>
-	<ol>
-		<li>
-			<a href="#about">About The Project</a>
-			<ul>
-				<li><a href="#built-with">Built Using</a></li>
-			</ul>
-		</li>
-		<li>
-			<a href="#getting-started">Getting Started</a>
-			<ul>
-				<li><a href="#installation">Installation</a></li>
-			</ul>
-		</li>
-		<li><a href="#usage">Usage</a></li>
-		<li><a href="#license">License</a></li>
-	</ol>
-</details>
+STATUS: Under active development — features, levels and polish are still being added.
 
+---
 
-<!-- ABOUT -->
-## About The Project
-<br />
+## Overview
 
-[![Product Screenshot][product-screenshot]](https://waka.hackclub.com)
+Magic Game is a prototype action-platformer made with Godot 4.x. You play a spellcaster who can run, jump, light-attack, charge heavy attacks, use a flame jet special, and fire ranged projectiles. The project contains example levels, player/enemy scripts, a simple HUD with health bar, and a basic inventory UI for potions and items.
 
-This tool can successfully measure time spent building your games or apps in Godot.
-<br />
-Here's why:
-* It differentiates between switching a scene and script
-* It counts key presses as coding and mouse clicks as building scene
-* Changing scene structure results in a heartbeat sent
-* It correctly detects OS, machine name, language, editor, files
-* It can detect your cursor line and position
-* Time is split between: Building, Coding, Testing
-* In the future it will also detect testing your projects
+This repository is the development source. Expect bugs, missing audio, and placeholder art while the project is being iterated on.
 
-It works on both Linux and Windows, it wasn't tested on macOS yet
-<br />
-You can also see your time spent in the editor itself:
-[![Time in editor][time-screenshot]]
+## Quick facts
+- Engine: Godot 4.x (project file config_version=5)
+- Main scenes: `Scenes/main_menu.tscn`, `Scenes/level_selector.tscn`, `Scenes/level1.tscn`
+- Player scripts: `Scripts/fire_player.gd`, `Scripts/wanderer_player.gd`, `Scripts/lightning_player.gd`
+- Status: Work in progress — do not treat as a finished release
 
-<p align="right">(<a href="#readme-top">top</a>)</p>
+---
 
+## Gameplay & Features
 
-### Built Using
-I used the Ouch! CLI tool for decompression of files <br />
-This project was built using one simple, yet powerful language.<br />
-It required a lot of workarounds, but it was a pleasure to use it
-* [![GDScript][Godot]][Godot-url]
-* [![Ouch!][Ouch-shield]][Ouch-url]
+- Tight 2D platforming movement (run, jump, knockback)
+- Melee combat with light and charged heavy attacks (charged attack triggers after ~2s)
+- Special abilities: flame jet (close-range), fireball (ranged)
+- Enemy AI and simple damage/health systems
+- HUD with health bar and inventory UI for consumables
+- Tile-based levels using free pixel forest assets (included under their original licenses)
 
-<p align="right">(<a href="#readme-top">top</a>)</p>
+## Controls (default)
+- Move left / right: MOVE_LEFT / MOVE_RIGHT (A / D or Arrow keys)
+- Jump: Jump (Space)
+- Light Attack: Attack (mouse button / key)
+- Heavy Attack: Hold Attack to charge, release to perform (held >= ~2s)
+- Special Attack: Special_attack (default Q)
+- Ranged Attack: Ranged_attack (default E)
+- Toggle Inventory: Inventory (default I)
+- Pause: Pause / Escape
 
-<!-- GETTING STARTED -->
-## Getting Started
-How to install and use this software? It's easy!
+Input actions are configurable in `project.godot` under the `[input]` section.
 
-### Installation
-You can either download it from the [Godot Asset Library](https://godotengine.org/asset-library/asset/3484).
-<br />Or you can manually install it, here's how to do it!
-1. Clone the repository
-	```sh
-	git clone https://github.com/BudzioT/Godot_Super-Wakatime.git
-	```
-2. Go into your project
-3. Insert the entire `./addons` folder into your project `res://` directory
+---
 
-<p align="right">(<a href="#readme-top">top</a>)</p>
+## How to run (development)
 
-<!-- USAGE -->
-## Usage
-Don't know how to use this plugin? Here are the steps:
-1. Turn on the plugin in your plugins. In your `Project -> Project Settings -> Plugins -> `Click the `Enable` checkbox near this plugin
-2. If prompted for API key, provide it from Wakatime website
-3. if there is an issue with it, please manually create `~/.wakatime.cfg` file with these contents:
-    ```sh
-    [settings]
-    api_key=xxxx
-    ```
-    Where xxxx is your api key
-<br /><br />
-If you are coming from Hack Club use this:
-    ```sh
-    [settings]
-    api_url = https://hackatime.hackclub.com/api/hackatime/v1
-    api_key=xxxx
-    ```
-4. Wakatime CLI should have been installed automatically along with Ouch! Decompression library
-5. Work on your project! You should see your results on either Wakatime or Hackatime!
-6. You can also see your time at the bottom panel
+1. Install Godot 4.x if you haven't already: https://godotengine.org/download
+2. Open the Godot editor and choose `Import` → point to this project's folder (where `project.godot` is located), or open the folder directly.
+3. Open `Scenes/main_menu.tscn` and press Run. You can also run `Scenes/level1.tscn` directly for quick testing.
 
-<p align="right">(<a href="#readme-top">top</a>)</p>
+To play a standalone build, create an exported project for your platform from Godot's export templates.
 
-<!-- LICENSE -->
-## License
+---
 
-Distributed under the MIT License. See `LICENSE` for more information.
+## Project layout (important files)
+- `Scenes/` — level scenes, UI scenes, player and enemy scenes
+- `Scripts/` — GDScript code for player, enemies, UI and menus
+- `assets/` — art and audio assets (some are third-party free assets)
+- `addons/` — included plugins (e.g., godot_super-wakatime)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
 
+## Known issues & notes
+- Prototype state: missing polish, missing or placeholder sounds, balance and tuning required.
+- Some asset folders may be large. If you plan to publish the repository or upload to itch.io, consider using Git LFS for large binaries or exclude them from source bundles.
 
-<!-- URLS -->
-[contributors-shield]: https://img.shields.io/github/contributors/budziot/Godot_Super-Wakatime?style=for-the-badge
-[contributors-url]: https://github.com/BudzioT/Godot_Super-Wakatime/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/budziot/Godot_Super-Wakatime?style=for-the-badge
-[forks-url]: https://github.com/BudzioT/Godot_Super-Wakatime/forks
-[stars-shield]: https://img.shields.io/github/stars/budziot/Godot_Super-Wakatime?style=for-the-badge
-[stars-url]: https://github.com/BudzioT/Godot_Super-Wakatime/stargazers
-[issues-shield]: https://img.shields.io/github/issues/budziot/Godot_Super-Wakatime?style=for-the-badge
-[issues-url]: https://github.com/BudzioT/Godot_Super-Wakatime/issues
-[license-shield]: https://img.shields.io/github/license/budziot/Godot_Super-Wakatime?style=for-the-badge
-[license-url]: https://github.com/BudzioT/Godot_Super-Wakatime/blob/master/addons/godot_super-wakatime/LICENSE
-[product-screenshot]: https://cloud-j4wibbzz7-hack-club-bot.vercel.app/0image.png
-[product-logo]: https://cloud-j4wibbzz7-hack-club-bot.vercel.app/2godotwaka2.png
-[Godot]: https://img.shields.io/badge/Godot%20Engine-478CBF?logo=godotengine&logoColor=fff&style=flat
-[Godot-url]: https://godotengine.org/
-[Ouch-shield]: https://img.shields.io/badge/Ouch!-tool-blue?label=Ouch!
-[Ouch-url]: https://github.com/ouch-org/ouch
-[time-screenshot]: https://cloud-l88kldf50-hack-club-bot.vercel.app/0image.png
+---
+
+## Contributing
+
+Contributions are welcome! If you'd like to help:
+
+1. Fork the repository and make feature branches for your work.
+2. Keep changes small and focused (e.g., `feature/new-enemy`, `fix/attack-bug`).
+3. Open a pull request describing the change and any testing steps.
+
+Please note: because this project is under development, breaking changes may occur on the `master` branch.
+
+---
+
+## Credits & Licenses
+
+- Game code and project: (your name or handle) — replace with your preferred credit
+- Art: Free Pixel Art Forest and other free assets included in `assets/` — check the original asset licenses in the `assets/` folders
+- Inventory UI sprites: included in `assets/Inventory/`
+- Tools: Godot Engine, optional plugin `addons/godot_super-wakatime`
+
+This project is distributed under the MIT License. See `LICENSE` for details.
+
+---
+
+## Packaging for itch.io (developer notes)
+
+- If you upload source to itch.io, consider including a small `UPLOAD.md` explaining which folders to include (e.g., `Scenes/`, `Scripts/`, `assets/` if desired).
+- If you want to publish game builds rather than the full source, export platform-specific builds from Godot and upload those instead.
+
+---
+
+If you want, I can also:
+
+- generate an `UPLOAD.md` with packaging steps for itch.io,
+- add a `.gitattributes` recommending Git LFS for large images (PNGs/JPGs) and a tuned `.gitignore`, or
+- prepare a short release notes template for your jam/public release.
+
