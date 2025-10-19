@@ -9,13 +9,6 @@ This is my first game created on magic theme. This is a 2d game Created in Godot
 In this game you follow a story of a Magician(Name not decided yet) Whose father was the Previous Keeper of Essence stones(the Most Powerful magical Stones). But One Day His Father and Essence Stones Got Lost. Essence Stones was very Important for this World because they control all the nature and because they got lost the sun does not shine and got lost behind the clouds. So to Save the World and find his Father Our Magician(The Player) became new Essence keeper and Got a Sword of Essence Keeper Which can hold teh Power of Essence Stones. There is also a new Dark Society which cone to life after the Essence Stones got lost.(Story To be Continued)
 
 
-## Quick facts
-- Engine: Godot 4.5
-- Main scene: `Scenes/main_menu.tscn`
-- Player scripts: `Scripts/fire_player.gd`, `Scripts/wanderer_player.gd`, `Scripts/lightning_player.gd`
-- Status: Work in progress — do not treat as a finished release
----
-
 ## Gameplay & Features
 
 - Tight 2D platforming movement (run, jump, knockback)
