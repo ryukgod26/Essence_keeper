@@ -7,12 +7,12 @@ var player_alive:bool = true
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var attacking:bool = false
-@onready var enemy_attack_cooldown_timer: Timer = $enemy_attack_cooldown
+@onready var enemy_attack_cooldown_timer: Timer = $Timers/InvcTImer
 @export var inv :Inv
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var alive:bool = true
 var can_attack:bool = true
-@onready var player_attack_timer: Timer = $player_attack_timer
+@onready var player_attack_timer: Timer = $Timers/InvcTImer
 var is_charging:bool
 var held_attack_fired:bool
 var charge_time:float
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 			held_attack_fired = true
 	if Input.is_action_just_pressed("Special_attack") and is_on_floor() and can_attack:
 		flame_jet()
-	
+	move_logic()
 
 	
 		

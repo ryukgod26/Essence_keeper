@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://ca1j31xqp87f5"]
+[gd_scene load_steps=7 format=3 uid="uid://ca1j31xqp87f5"]
 
 [ext_resource type="Script" uid="uid://dh1100288kb1q" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
+[ext_resource type="FontFile" uid="uid://cxnwbvw7ausmq" path="res://assets/fonts/machoman/MACHOMAN.ttf" id="2_k0w1u"]
+[ext_resource type="Texture2D" uid="uid://dg3mfta5qfvvr" path="res://assets/Buttons/glossy-web-buttons-set-different-colors/Adobe_transparent.png" id="3_1och7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0w1u"]
+atlas = ExtResource("3_1och7")
+region = Rect2(166.39189, 532.90594, 1736.1401, 451.31134)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1och7"]
+texture = SubResource("AtlasTexture_k0w1u")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpi0q"]
+texture = SubResource("AtlasTexture_k0w1u")
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -11,26 +23,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_emv3i")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginButtonManager" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VButtonManager" type="VBoxContainer" parent="MarginButtonManager"]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="MarginButtonManager/VButtonManager"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_k0w1u")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_1och7")
 text = "Resume"
 
-[node name="Main_Menu" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Main_Menu" type="Button" parent="MarginButtonManager/VButtonManager"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_k0w1u")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_bpi0q")
 text = "Main Menu"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="MarginButtonManager/VButtonManager"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_k0w1u")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_bpi0q")
 text = "Quit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Main_Menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginButtonManager/VButtonManager/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginButtonManager/VButtonManager/Main_Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginButtonManager/VButtonManager/Quit" to="." method="_on_quit_pressed"]

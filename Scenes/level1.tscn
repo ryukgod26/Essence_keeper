@@ -5951,16 +5951,17 @@ tile_set = SubResource("TileSet_vly50")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="fire_player" parent="Entities" instance=ExtResource("3_didp7")]
+position = Vector2(8, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Entities/fire_player"]
 zoom = Vector2(4, 4)
 
-[node name="PauseMenu" parent="Entities/fire_player" instance=ExtResource("6_didp7")]
+[node name="PauseMenu2" parent="Entities/fire_player" instance=ExtResource("6_didp7")]
 visible = false
-offset_left = -47.0
-offset_top = -48.0
-offset_right = -47.0
-offset_bottom = -48.0
+offset_left = -51.0
+offset_top = -56.0
+offset_right = -51.0
+offset_bottom = -56.0
 
 [node name="Enemies" type="Node" parent="."]
 

@@ -8,7 +8,7 @@ var player = null
 var spawned:bool = false
 var player_in_attack_zone= false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not spawned:
 		return
 	if player_chase:
