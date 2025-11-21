@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk5vpq5vvgq2w"]
+
+[ext_resource type="PackedScene" uid="uid://s3mive8py822" path="res://Scenes/inv_ui_slot.tscn" id="1_uvnfx"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="inv_ui_slot" parent="." instance=ExtResource("1_uvnfx")]
+offset_left = 2.0
+offset_top = -13.0
+offset_right = 2.0
+offset_bottom = -13.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvcTImer" type="Timer" parent="Timers"]
+
+[node name="AttackCooldown" type="Timer" parent="Timers"]
