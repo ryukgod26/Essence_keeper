@@ -577,7 +577,7 @@ sprite_frames = SubResource("SpriteFrames_8sb7e")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="inv_ui_slot" parent="." index="3"]
+[node name="inv_ui_slot" parent="." index="2"]
 offset_left = -5.0
 offset_top = -41.0
 offset_right = -5.0

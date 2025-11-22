@@ -1,15 +1,15 @@
-extends CharacterBody2D
+extends Player
 
 var enemy_inattack_range:bool = false
 var enemy_attack_cooldown:bool = true
-var health:int = 100
+#var health:int = 100
 var player_alive:bool = true
-const SPEED = 300.0
+#const SPEED = 300.0-
 const JUMP_VELOCITY = -400.0
-var attacking:bool = false
+#var attacking:bool = false
 @onready var enemy_attack_cooldown_timer: Timer = $Timers/InvcTImer
 @export var inv :Inv
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+#@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var alive:bool = true
 var can_attack:bool = true
 @onready var player_attack_timer: Timer = $Timers/InvcTImer
@@ -128,14 +128,3 @@ func heavy_attack():
 
 func _on_player_attack_timer_timeout() -> void:
 	can_attack = true
-
-func move_logic():
-	var direction := Input.get_axis("MOVE_LEFT", "MOVE_RIGHT")
-	if is_on_floor() and not attacking:
-		if direction != 0:
-			velocity.x = direction * SPEED
-			animated_sprite.play("Run")
-			animated_sprite.flip_h = direction < 0
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			animated_sprite.play("Idle")
