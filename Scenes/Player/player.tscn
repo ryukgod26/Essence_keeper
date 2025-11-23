@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bk5vpq5vvgq2w"]
+[gd_scene load_steps=3 format=3 uid="uid://bk5vpq5vvgq2w"]
 
 [ext_resource type="PackedScene" uid="uid://s3mive8py822" path="res://Scenes/inv_ui_slot.tscn" id="1_uvnfx"]
+[ext_resource type="PackedScene" uid="uid://ce2b7018idwtm" path="res://Scenes/Player/Dash.tscn" id="2_a3d8c"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -10,6 +13,7 @@ position = Vector2(0, -3)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="inv_ui_slot" parent="." instance=ExtResource("1_uvnfx")]
+visible = false
 offset_left = 2.0
 offset_top = -13.0
 offset_right = 2.0
@@ -20,3 +24,5 @@ offset_bottom = -13.0
 [node name="InvcTImer" type="Timer" parent="Timers"]
 
 [node name="AttackCooldown" type="Timer" parent="Timers"]
+
+[node name="Dash" parent="." instance=ExtResource("2_a3d8c")]

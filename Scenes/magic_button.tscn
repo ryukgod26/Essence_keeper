@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://do0xjw2mfi874"]
+
+[ext_resource type="Script" uid="uid://bgdk22o4uvmqi" path="res://Scripts/magic_button.gd" id="1_lpx4t"]
+
+[node name="MagicButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_lpx4t")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="StoneBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cracks" type="TextureRect" parent="StoneBackground"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CarvedBorder" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MagicGlow" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonText" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

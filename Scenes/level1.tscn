@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://d4iovmuhghp22"]
+[gd_scene load_steps=12 format=4 uid="uid://d4iovmuhghp22"]
 
 [ext_resource type="Script" uid="uid://q2mebn0anmhh" path="res://Scripts/level_1.gd" id="1_y4dr7"]
 [ext_resource type="PackedScene" uid="uid://dqe8eicie5q61" path="res://Scenes/ui.tscn" id="3_c5erv"]
 [ext_resource type="PackedScene" uid="uid://o58orxorbwxb" path="res://Scenes/Player/lightning_player.tscn" id="3_didp7"]
 [ext_resource type="PackedScene" uid="uid://decc2pao25m5x" path="res://Scenes/ghost.tscn" id="3_lyd6k"]
+[ext_resource type="PackedScene" uid="uid://bwvcay7kyjmpa" path="res://Scenes/Enemy/dark_spirit.tscn" id="5_2a60c"]
 [ext_resource type="PackedScene" uid="uid://ca1j31xqp87f5" path="res://Scenes/pause_menu.tscn" id="6_didp7"]
 [ext_resource type="Texture2D" uid="uid://cdx3girie1w4d" path="res://assets/Dark_Forest/Free Pixel Art Forest/Free Pixel Art Forest/Preview/Background.png" id="13_d1mwp"]
 
@@ -5961,6 +5962,9 @@ offset_left = -51.0
 offset_top = -56.0
 offset_right = -51.0
 offset_bottom = -56.0
+
+[node name="DarkSpirit" parent="Entities" instance=ExtResource("5_2a60c")]
+position = Vector2(667, 26)
 
 [node name="Enemies" type="Node" parent="."]
 
