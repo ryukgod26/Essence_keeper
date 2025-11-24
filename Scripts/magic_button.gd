@@ -1,30 +1,48 @@
 extends Control
 
-@onready var button = $Button
-@onready var anim = $AnimationPlayer
-@onready var label = $ButtonText
+@onready var colors: Control = $ButtonControl/Button/Colors
+var tween: Tween
+@onready var label: Label = $ButtonControl/Label
+@onready var panel: Panel = $ButtonControl/Panel
+@export var text = "Something"
 
-# Export allows you to change text in the Inspector for each instance
-@export var text: String = "Button":
-	set(value):
-		text = value
-		if label: label.text = value
+signal pressed
 
-func _ready():
-	# Connect the internal button signals
-	button.mouse_entered.connect(_on_hover)
-	button.mouse_exited.connect(_on_exit)
-	button.pressed.connect(_on_pressed)
+func _ready() -> void:
 	label.text = text
 
-func _on_hover():
-	anim.play("hover_glow") # Create this animation to fade in the Glow node
-	# Optional: Play a "Stone Grinding" sound effect here
 
-func _on_exit():
-	anim.play_backwards("hover_glow")
+func hover_on() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	for i in range(colors.get_child_count()):
+		var c = colors.get_child(i)
+		tween.parallel().tween_property(c, "position:y", 0.0, 0.3 + (i * randf_range(0.08, 0.15)))
+	
+	tween.parallel().tween_property(label, "self_modulate", Color("#333333"), 0.45)
+	tween.parallel().tween_property(panel.get("theme_override_styles/panel"), "border_color", Color("#4c4c4f"), 0.45)
+func hover_off() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		
+	for i in range(colors.get_child_count()-1, -1, -1):
+		print("Child idx: ", i)
+		var c = colors.get_child(i)
+		tween.parallel().tween_property(c, "position:y", c.size.y, 0.7 - (i * randf_range(0.05, 0.1)))
 
-func _on_pressed():
-	# Forward the signal to the parent menu
-	# You can define a custom signal if you want
-	pass
+	tween.parallel().tween_property(label, "self_modulate", Color("#676767"), 0.85)
+	tween.parallel().tween_property(panel.get("theme_override_styles/panel"), "border_color", Color("#a9a9ac"), 0.85)
+
+
+func _on_button_mouse_entered() -> void:
+	hover_on()
+
+
+func _on_button_mouse_exited() -> void:
+	hover_off()
+
+
+func _on_button_pressed() -> void:
+	pressed.emit()

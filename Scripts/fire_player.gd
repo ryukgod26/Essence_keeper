@@ -4,8 +4,6 @@ var enemy_inattack_range:bool = false
 var enemy_attack_cooldown:bool = true
 #var health:int = 100
 var player_alive:bool = true
-#const SPEED = 300.0-
-const JUMP_VELOCITY = -400.0
 #var attacking:bool = false
 @onready var enemy_attack_cooldown_timer: Timer = $Timers/InvcTImer
 @export var inv :Inv

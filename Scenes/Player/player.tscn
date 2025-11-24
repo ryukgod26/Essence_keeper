@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk5vpq5vvgq2w"]
+[gd_scene load_steps=4 format=3 uid="uid://bk5vpq5vvgq2w"]
 
 [ext_resource type="PackedScene" uid="uid://s3mive8py822" path="res://Scenes/inv_ui_slot.tscn" id="1_uvnfx"]
+[ext_resource type="Script" uid="uid://12glx4javmef" path="res://Scripts/player.gd" id="1_xpcdj"]
 [ext_resource type="PackedScene" uid="uid://ce2b7018idwtm" path="res://Scenes/Player/Dash.tscn" id="2_a3d8c"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
+script = ExtResource("1_xpcdj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -26,3 +28,13 @@ offset_bottom = -13.0
 [node name="AttackCooldown" type="Timer" parent="Timers"]
 
 [node name="Dash" parent="." instance=ExtResource("2_a3d8c")]
+
+[node name="WeaponArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponArea"]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="WeaponArea" to="." method="_on_weapon_area_body_entered"]
+[connection signal="body_exited" from="WeaponArea" to="." method="_on_weapon_area_body_exited"]

@@ -6007,3 +6007,5 @@ offset_top = 77.0
 offset_right = -347.0
 offset_bottom = 100.0
 text = "Press i for inventory"
+
+[connection signal="health_changed" from="Entities/player" to="." method="_on_player_health_changed"]

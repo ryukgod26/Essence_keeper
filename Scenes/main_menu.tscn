@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8y6ta15rna4s" path="res://Scripts/main_menu.gd" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://b16vgieg0yebk" path="res://assets/main_menu/Images/allinone.png" id="2_1ehe0"]
-[ext_resource type="PackedScene" uid="uid://do0xjw2mfi874" path="res://Scenes/magic_button.tscn" id="3_1ehe0"]
+[ext_resource type="PackedScene" uid="uid://d1oqksc2i3nok" path="res://Scenes/magic_button.tscn" id="3_1ehe0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n45e2"]
 atlas = ExtResource("2_1ehe0")
@@ -47,6 +47,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 12.0
+offset_right = 19.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_28flt")
@@ -60,29 +64,44 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_28flt")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -167.0
-offset_right = 599.0
-offset_bottom = 138.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 13
+[node name="Start" parent="." instance=ExtResource("3_1ehe0")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1229.0
+offset_top = 294.0
+offset_right = 1459.0
+offset_bottom = 344.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Start"
 
-[node name="MagicButton" parent="VBoxContainer" instance=ExtResource("3_1ehe0")]
-layout_mode = 2
+[node name="Options" parent="." instance=ExtResource("3_1ehe0")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1042.0
+offset_top = 386.0
+offset_right = 1645.0
+offset_bottom = 386.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Options"
 
-[node name="MagicButton2" parent="VBoxContainer" instance=ExtResource("3_1ehe0")]
-layout_mode = 2
-
-[node name="MagicButton3" parent="VBoxContainer" instance=ExtResource("3_1ehe0")]
-layout_mode = 2
+[node name="Quit" parent="." instance=ExtResource("3_1ehe0")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1044.0
+offset_top = 447.0
+offset_right = 1647.0
+offset_bottom = 447.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Quit"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(787, -3)
@@ -93,3 +112,7 @@ texture = SubResource("GradientTexture2D_n45e2")
 lifetime = 7.0
 preprocess = 4.0
 process_material = SubResource("ParticleProcessMaterial_ce3w2")
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

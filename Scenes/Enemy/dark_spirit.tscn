@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bwvcay7kyjmpa"]
+[gd_scene load_steps=70 format=3 uid="uid://bwvcay7kyjmpa"]
 
 [ext_resource type="PackedScene" uid="uid://c4gp4m7c2vxc5" path="res://Scenes/Enemy/enemy.tscn" id="1_ls480"]
 [ext_resource type="Texture2D" uid="uid://c1d7i8g68cm6n" path="res://assets/Enemies/E_Bros_Assets_TopDownEnemy/Enemy-Melee-Attack-E.png" id="2_ipwlv"]
@@ -321,7 +321,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jn3ug")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack",
 "speed": 15.0
 }, {
@@ -398,7 +398,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yqlir")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -451,14 +451,16 @@ height = 146.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_pm2pp"]
 radius = 450.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipwlv"]
+size = Vector2(66, 136)
+
 [node name="DarkSpirit" instance=ExtResource("1_ls480")]
 script = ExtResource("2_rp5gq")
 
 [node name="AnimatedSprite" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_3pfor")
-animation = &"Idle"
+animation = &"Attack"
 autoplay = "Idle"
-frame_progress = 0.466281
 
 [node name="CollisionShape" parent="." index="1"]
 position = Vector2(0, 3)
@@ -467,5 +469,15 @@ shape = SubResource("CapsuleShape2D_ns58i")
 [node name="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource("CircleShape2D_pm2pp")
 
+[node name="WeaponArea" parent="." index="3"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="WeaponArea" index="0"]
+position = Vector2(47, -5)
+shape = SubResource("RectangleShape2D_ipwlv")
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="WeaponArea" to="." method="_on_weapon_area_body_entered"]
+[connection signal="body_exited" from="WeaponArea" to="." method="_on_weapon_area_body_exited"]
