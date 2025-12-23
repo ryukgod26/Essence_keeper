@@ -8,7 +8,7 @@ var player_alive:bool = true
 @onready var enemy_attack_cooldown_timer: Timer = $Timers/InvcTImer
 @export var inv :Inv
 #@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-var alive:bool = true
+
 var can_attack:bool = true
 @onready var player_attack_timer: Timer = $Timers/InvcTImer
 var is_charging:bool
@@ -16,7 +16,6 @@ var held_attack_fired:bool
 var charge_time:float
 const HELD_ATTACK_THRESHOLD:float = 2.0
 
-signal health_changed(HEALTH:int)
 
 func _physics_process(delta: float) -> void:
 	if not alive:

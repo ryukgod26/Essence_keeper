@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://o58orxorbwxb"]
+[gd_scene load_steps=84 format=3 uid="uid://o58orxorbwxb"]
 
 [ext_resource type="PackedScene" uid="uid://bk5vpq5vvgq2w" path="res://Scenes/Player/player.tscn" id="1_rw5oi"]
 [ext_resource type="Script" uid="uid://01lohwqjolv5" path="res://Scripts/Player/lightning_player.gd" id="2_god56"]
@@ -93,21 +93,9 @@ region = Rect2(384, 0, 128, 128)
 atlas = ExtResource("4_5sqla")
 region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_god56"]
-atlas = ExtResource("7_m7haj")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sqla"]
-atlas = ExtResource("7_m7haj")
-region = Rect2(640, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsuqt"]
 atlas = ExtResource("7_m7haj")
 region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_blp4u"]
-atlas = ExtResource("7_m7haj")
-region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8f54"]
 atlas = ExtResource("5_jsuqt")
@@ -377,18 +365,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_god56")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5sqla")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_jsuqt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_blp4u")
 }],
-"loop": true,
+"loop": false,
 "name": &"Fall",
 "speed": 5.0
 }, {
@@ -584,7 +563,7 @@ shape = SubResource("CapsuleShape2D_bmxo7")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(9, -33)
 sprite_frames = SubResource("SpriteFrames_8sb7e")
-animation = &"Attack2"
+animation = &"Fall"
 autoplay = "Idle"
 
 [node name="inv_ui_slot" parent="." index="2"]
