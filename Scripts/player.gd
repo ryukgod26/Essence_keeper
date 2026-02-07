@@ -13,12 +13,13 @@ enum STATE{
  
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash: Node2D = $Dash
+@onready var coyote_timer: Timer = $Timers/CoyoteTimer
+@onready var float_cooldown: Timer = $Timers/FloatCooldown
 
 @export var health := 5
 @export var base_speed := 300.
 @export var dash_speed := 800.
 @export var dash_length := .1
-@onready var coyote_timer: Timer = $Timers/CoyoteTimer
 
 const FALL_GRAVITY = 1500.
 const FALL_VELOCITY = 500.
@@ -26,6 +27,8 @@ const WALK_VELOCITY = 300.
 const JUMP_VELOCITY = -600.
 const JUMP_DEACCELERATION = 1500.
 const DOUBLE_JUMP_VELOCITY := -450.
+const FLOAT_GRAVITY := 200.
+const FLOAT_VELOCITY := 100.
 
 var Enemies = []
 signal health_changed(Health:int)
@@ -146,6 +149,14 @@ func change_state(state: STATE):
 			animated_sprite.play("DoubleJump")
 			velocity.y = DOUBLE_JUMP_VELOCITY
 			can_double_jump = false
+		
+		STATE.FLOAT:
+			if float_cooldown.time_left > 0:
+				active_state = previous_state
+				return
+			animated_sprite.play("Float")
+			print("Create Float Animation")
+			velocity.y = 0
 
 func process_state(delta):
 	match active_state: 
@@ -160,6 +171,8 @@ func process_state(delta):
 					change_state(STATE.JUMP)
 				elif can_double_jump:
 					change_state(STATE.DOUBLE_JUMP)
+				else:
+					change_state(STATE.FLOAT)
 			
 		STATE.FLOOR:
 			if Input.get_axis("Move_left","Move_right"):
@@ -177,12 +190,20 @@ func process_state(delta):
 		
 		STATE.JUMP, STATE.DOUBLE_JUMP:
 			velocity.y = move_toward(velocity.y,0,JUMP_DEACCELERATION * delta)
+			move_logic()
 			if Input.is_action_just_released("Jump") or velocity.y >= 0:
 				velocity.y = 0
 				change_state(STATE.FALL)
 			
 		STATE.FLOAT:
-			pass
+			velocity.y = move_toward(velocity.y,FLOAT_VELOCITY,FLOAT_GRAVITY * delta)
+			move_logic()
+			
+			if is_on_floor():
+				change_state(STATE.FLOOR)
+			elif Input.is_action_just_released("Jump"):
+				float_cooldown.start()
+				change_state(STATE.FALL)
 			
 		STATE.LEDGE_CLIMB:
 			pass
