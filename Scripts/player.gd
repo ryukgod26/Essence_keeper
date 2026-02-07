@@ -25,12 +25,14 @@ const FALL_VELOCITY = 500.
 const WALK_VELOCITY = 300.
 const JUMP_VELOCITY = -600.
 const JUMP_DEACCELERATION = 1500.
+const DOUBLE_JUMP_VELOCITY := -450.
 
 var Enemies = []
 signal health_changed(Health:int)
 var SPEED:float = base_speed
 var attacking
 var active_state: STATE
+var can_double_jump := false
 
 #enum States {Idle,Walk,Run,Hurt,Death,TakeOff,Jump,Land,Fall}
 
@@ -127,14 +129,23 @@ func change_state(state: STATE):
 	active_state = state
 	match active_state:
 		STATE.FALL:
-			animated_sprite.play("Fall")
+			if previous_state != STATE.DOUBLE_JUMP:
+				animated_sprite.play("Fall")
 			if previous_state == STATE.FLOOR:
 				coyote_timer.start()
+		
+		STATE.FLOOR:
+			can_double_jump = true
 		
 		STATE.JUMP:
 			animated_sprite.play("Jump")
 			velocity.y = JUMP_VELOCITY
 			coyote_timer.stop()
+		
+		STATE.DOUBLE_JUMP:
+			animated_sprite.play("DoubleJump")
+			velocity.y = DOUBLE_JUMP_VELOCITY
+			can_double_jump = false
 
 func process_state(delta):
 	match active_state: 
@@ -144,8 +155,11 @@ func process_state(delta):
 			
 			if is_on_floor():
 				change_state(STATE.FLOOR)
-			elif Input.is_action_just_pressed("Jump") and coyote_timer.time_left> 0:
-				change_state(STATE.JUMP)
+			elif Input.is_action_just_pressed("Jump")  :
+				if coyote_timer.time_left> 0:
+					change_state(STATE.JUMP)
+				elif can_double_jump:
+					change_state(STATE.DOUBLE_JUMP)
 			
 		STATE.FLOOR:
 			if Input.get_axis("Move_left","Move_right"):
@@ -161,14 +175,11 @@ func process_state(delta):
 				change_state(STATE.JUMP)
 	
 		
-		STATE.JUMP:
+		STATE.JUMP, STATE.DOUBLE_JUMP:
 			velocity.y = move_toward(velocity.y,0,JUMP_DEACCELERATION * delta)
 			if Input.is_action_just_released("Jump") or velocity.y >= 0:
 				velocity.y = 0
 				change_state(STATE.FALL)
-			
-		STATE.DOUBLE_JUMP:
-			pass
 			
 		STATE.FLOAT:
 			pass

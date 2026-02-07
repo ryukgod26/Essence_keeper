@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://o58orxorbwxb"]
+[gd_scene load_steps=86 format=3 uid="uid://o58orxorbwxb"]
 
 [ext_resource type="PackedScene" uid="uid://bk5vpq5vvgq2w" path="res://Scenes/Player/player.tscn" id="1_rw5oi"]
 [ext_resource type="Script" uid="uid://01lohwqjolv5" path="res://Scripts/Player/lightning_player.gd" id="2_god56"]
@@ -92,6 +92,18 @@ region = Rect2(384, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j7tb"]
 atlas = ExtResource("4_5sqla")
 region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blp4u"]
+atlas = ExtResource("7_m7haj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7haj"]
+atlas = ExtResource("7_m7haj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58jxu"]
+atlas = ExtResource("7_m7haj")
+region = Rect2(640, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsuqt"]
 atlas = ExtResource("7_m7haj")
@@ -361,6 +373,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_blp4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7haj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58jxu")
+}],
+"loop": false,
+"name": &"DoubleJump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jsuqt")
 }],
 "loop": false,
@@ -565,7 +591,7 @@ shape = SubResource("CapsuleShape2D_bmxo7")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(9, -33)
 sprite_frames = SubResource("SpriteFrames_8sb7e")
-animation = &"Jump"
+animation = &"DoubleJump"
 autoplay = "Idle"
 
 [node name="inv_ui_slot" parent="." index="2"]

@@ -5952,7 +5952,7 @@ tile_set = SubResource("TileSet_vly50")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="player" parent="Entities" instance=ExtResource("3_didp7")]
-position = Vector2(-111, -773)
+position = Vector2(642, 52)
 
 [node name="Enemies" type="Node" parent="."]
 

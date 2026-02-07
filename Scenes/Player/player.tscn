@@ -8,10 +8,6 @@
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xpcdj")
-health = null
-base_speed = null
-dash_speed = null
-dash_length = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -35,6 +31,8 @@ offset_bottom = -13.0
 process_callback = 0
 wait_time = 0.2
 one_shot = true
+
+[node name="FloatCooldown" type="Timer" parent="Timers"]
 
 [node name="Dash" parent="." instance=ExtResource("2_a3d8c")]
 
