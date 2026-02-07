@@ -548,7 +548,7 @@ shape = SubResource("CapsuleShape2D_iceyr")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(13, -36)
 sprite_frames = SubResource("SpriteFrames_qeej4")
-animation = &"Fall"
+animation = &"Fireball"
 autoplay = "Idle"
 
 [node name="PauseMenu" parent="." index="4" instance=ExtResource("12_pkxnh")]

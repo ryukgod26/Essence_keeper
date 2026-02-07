@@ -18,6 +18,7 @@ enum STATE{
 @export var base_speed := 300.
 @export var dash_speed := 800.
 @export var dash_length := .1
+@onready var coyote_timer: Timer = $Timers/CoyoteTimer
 
 const FALL_GRAVITY = 1500.
 const FALL_VELOCITY = 500.
@@ -122,35 +123,49 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		get_tree().reload_current_scene()
 
 func change_state(state: STATE):
+	var previous_state := active_state
 	active_state = state
 	match active_state:
 		STATE.FALL:
 			animated_sprite.play("Fall")
+			if previous_state == STATE.FLOOR:
+				coyote_timer.start()
 		
 		STATE.JUMP:
-			animated_sprite.play("jump")
+			animated_sprite.play("Jump")
 			velocity.y = JUMP_VELOCITY
+			coyote_timer.stop()
 
 func process_state(delta):
-	match active_state:
+	match active_state: 
 		STATE.FALL:
 			velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
 			move_logic()
 			
 			if is_on_floor():
 				change_state(STATE.FLOOR)
-		
+			elif Input.is_action_just_pressed("Jump") and coyote_timer.time_left> 0:
+				change_state(STATE.JUMP)
+			
 		STATE.FLOOR:
 			if Input.get_axis("Move_left","Move_right"):
 				animated_sprite.play("Walk")
 			else:
 				animated_sprite.play("Idle")
 			move_logic()
+			
 			if not is_on_floor():
 				change_state(STATE.FALL)
+				
+			if Input.is_action_just_pressed("Jump"):
+				change_state(STATE.JUMP)
+	
 		
 		STATE.JUMP:
-			pass
+			velocity.y = move_toward(velocity.y,0,JUMP_DEACCELERATION * delta)
+			if Input.is_action_just_released("Jump") or velocity.y >= 0:
+				velocity.y = 0
+				change_state(STATE.FALL)
 			
 		STATE.DOUBLE_JUMP:
 			pass

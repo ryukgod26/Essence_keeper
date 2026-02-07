@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://o58orxorbwxb"]
+[gd_scene load_steps=83 format=3 uid="uid://o58orxorbwxb"]
 
 [ext_resource type="PackedScene" uid="uid://bk5vpq5vvgq2w" path="res://Scenes/Player/player.tscn" id="1_rw5oi"]
 [ext_resource type="Script" uid="uid://01lohwqjolv5" path="res://Scripts/Player/lightning_player.gd" id="2_god56"]
@@ -137,21 +137,17 @@ region = Rect2(640, 0, 128, 128)
 atlas = ExtResource("6_blp4u")
 region = Rect2(768, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jpcln"]
-atlas = ExtResource("7_m7haj")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ep3fx"]
-atlas = ExtResource("7_m7haj")
-region = Rect2(128, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_782gt"]
 atlas = ExtResource("7_m7haj")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kl2ys"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_god56"]
 atlas = ExtResource("7_m7haj")
-region = Rect2(384, 0, 128, 128)
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sqla"]
+atlas = ExtResource("7_m7haj")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upejk"]
 atlas = ExtResource("8_58jxu")
@@ -413,20 +409,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jpcln")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ep3fx")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_782gt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kl2ys")
 }],
-"loop": true,
+"loop": false,
 "name": &"Jump",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_god56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sqla")
+}],
+"loop": true,
+"name": &"Launch",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -556,6 +554,10 @@ size = Vector2(31, 35)
 
 [node name="lightning_player" instance=ExtResource("1_rw5oi")]
 script = ExtResource("2_god56")
+health = 5
+base_speed = 300.0
+dash_speed = 800.0
+dash_length = 0.1
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CapsuleShape2D_bmxo7")
@@ -563,9 +565,8 @@ shape = SubResource("CapsuleShape2D_bmxo7")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(9, -33)
 sprite_frames = SubResource("SpriteFrames_8sb7e")
-animation = &"Death"
+animation = &"Jump"
 autoplay = "Idle"
-frame_progress = 0.6569408
 
 [node name="inv_ui_slot" parent="." index="2"]
 offset_left = -5.0
