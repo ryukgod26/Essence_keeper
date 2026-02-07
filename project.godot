@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Magic_Game"
+config/name="Essence Keeper"
 run/main_scene="uid://da6ts73lf2l4b"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"

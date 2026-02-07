@@ -10,7 +10,7 @@ enum STATE{
 	LEDGE_CLIMB,
 	LEDGE_JUMP,
 }
-
+ 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash: Node2D = $Dash
 
@@ -22,19 +22,34 @@ enum STATE{
 const FALL_GRAVITY = 1500.
 const FALL_VELOCITY = 500.
 const WALK_VELOCITY = 300.
+const JUMP_VELOCITY = -600.
+const JUMP_DEACCELERATION = 1500.
 
 var Enemies = []
-var JUMP_VELOCITY = -400
 signal health_changed(Health:int)
 var SPEED:float = base_speed
 var attacking
 var active_state: STATE
+
+#enum States {Idle,Walk,Run,Hurt,Death,TakeOff,Jump,Land,Fall}
+
+#var anim_map :={
+	#States.Idle:"Idle",
+	#States.Walk: "Walk",
+	#States.Run: "Run",
+	#States.Hurt: "Hurt",
+	#States.Death: "Death",
+	#States.Jump:"Jump",
+	#States.Fall: "Fall",
+	#
+#}
 
 func _ready() -> void:
 	change_state(STATE.FALL)
 
 func _physics_process(delta: float) -> void:
 	process_state(delta)
+	handle_sprite_direction()
 	move_and_slide()
 
 var alive = true
@@ -58,11 +73,6 @@ func move_logic():
 	#
 	#if Input.is_action_just_pressed("Jump") and is_on_floor() and not attacking:
 		#velocity.y = JUMP_VELOCITY
-#
-	#if Input.is_action_just_released("Jump") and velocity.y < 0:
-		#velocity.y *= 0.5
-
-	#_update_animations(move_input)
  
 func _update_animations(input_axis):
 	if attacking: 
@@ -89,6 +99,12 @@ func take_damage(Damage: int):
 		animated_sprite.play('Death')
 		alive = false
 
+func handle_sprite_direction() -> void:
+	if velocity.x > 0:
+		animated_sprite.flip_h = false
+	elif velocity.x < 0:
+		animated_sprite.flip_h = true
+
 func attack():
 	for enemy in Enemies:
 		enemy.take_damage(1)
@@ -110,14 +126,28 @@ func change_state(state: STATE):
 	match active_state:
 		STATE.FALL:
 			animated_sprite.play("Fall")
+		
+		STATE.JUMP:
+			animated_sprite.play("jump")
+			velocity.y = JUMP_VELOCITY
+
 func process_state(delta):
 	match active_state:
 		STATE.FALL:
 			velocity.y = move_toward(velocity.y, FALL_VELOCITY, FALL_GRAVITY * delta)
 			move_logic()
+			
+			if is_on_floor():
+				change_state(STATE.FLOOR)
 		
 		STATE.FLOOR:
-			pass
+			if Input.get_axis("Move_left","Move_right"):
+				animated_sprite.play("Walk")
+			else:
+				animated_sprite.play("Idle")
+			move_logic()
+			if not is_on_floor():
+				change_state(STATE.FALL)
 		
 		STATE.JUMP:
 			pass

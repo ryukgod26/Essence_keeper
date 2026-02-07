@@ -27,6 +27,11 @@ offset_bottom = -13.0
 
 [node name="AttackCooldown" type="Timer" parent="Timers"]
 
+[node name="CoyoteTime" type="Timer" parent="Timers"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
 [node name="Dash" parent="." instance=ExtResource("2_a3d8c")]
 
 [node name="WeaponArea" type="Area2D" parent="."]

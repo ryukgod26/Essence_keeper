@@ -426,7 +426,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Jump",
-"speed": 10.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -563,8 +563,9 @@ shape = SubResource("CapsuleShape2D_bmxo7")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(9, -33)
 sprite_frames = SubResource("SpriteFrames_8sb7e")
-animation = &"Fall"
+animation = &"Death"
 autoplay = "Idle"
+frame_progress = 0.6569408
 
 [node name="inv_ui_slot" parent="." index="2"]
 offset_left = -5.0
