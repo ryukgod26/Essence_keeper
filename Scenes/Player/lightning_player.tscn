@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://o58orxorbwxb"]
+[gd_scene load_steps=88 format=3 uid="uid://o58orxorbwxb"]
 
 [ext_resource type="PackedScene" uid="uid://bk5vpq5vvgq2w" path="res://Scenes/Player/player.tscn" id="1_rw5oi"]
 [ext_resource type="Script" uid="uid://01lohwqjolv5" path="res://Scripts/Player/lightning_player.gd" id="2_god56"]
@@ -164,6 +164,10 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5sqla"]
 atlas = ExtResource("7_m7haj")
 region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmcdj"]
+atlas = ExtResource("2_lutn4")
+region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upejk"]
 atlas = ExtResource("8_58jxu")
@@ -466,6 +470,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hmcdj")
+}],
+"loop": true,
+"name": &"LedgeClimb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_upejk")
 }, {
 "duration": 1.0,
@@ -599,7 +611,7 @@ shape = SubResource("CapsuleShape2D_bmxo7")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(9, -33)
 sprite_frames = SubResource("SpriteFrames_8sb7e")
-animation = &"Float"
+animation = &"LedgeClimb"
 autoplay = "Idle"
 
 [node name="inv_ui_slot" parent="." index="2"]
@@ -611,3 +623,11 @@ offset_bottom = -41.0
 [node name="CollisionShape2D" parent="WeaponArea" index="0"]
 position = Vector2(30.5, -7.5)
 shape = SubResource("RectangleShape2D_god56")
+
+[node name="LedgeClimbRaycast" parent="RayCasts" index="0"]
+position = Vector2(0, -33)
+target_position = Vector2(12, 18)
+
+[node name="LedgeSpaceRayCast" parent="RayCasts" index="1"]
+position = Vector2(-25, 29)
+target_position = Vector2(1, -71)

@@ -15,6 +15,9 @@ enum STATE{
 @onready var dash: Node2D = $Dash
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var float_cooldown: Timer = $Timers/FloatCooldown
+@onready var collision_shape: CollisionShape2D = %CollisionShape2D
+@onready var ledge_space_ray_cast: RayCast2D = %LedgeSpaceRayCast
+@onready var ledge_climb_raycast: RayCast2D = %LedgeClimbRaycast
 
 @export var health := 5
 @export var base_speed := 300.
@@ -36,6 +39,7 @@ var SPEED:float = base_speed
 var attacking
 var active_state: STATE
 var can_double_jump := false
+var facing_direction := 1.0
 
 #enum States {Idle,Walk,Run,Hurt,Death,TakeOff,Jump,Land,Fall}
 
@@ -52,19 +56,23 @@ var can_double_jump := false
 
 func _ready() -> void:
 	change_state(STATE.FALL)
+	ledge_climb_raycast.add_exception(self)
 
 func _physics_process(delta: float) -> void:
 	process_state(delta)
 	handle_sprite_direction()
 	move_and_slide()
 
-var alive = true
-
 func move_logic():
 	var move_input := signf(Input.get_axis("Move_left", "Move_right"))
 	
 	if move_input:
 		animated_sprite.flip_h = move_input < 0
+		facing_direction = move_input
+		ledge_climb_raycast.position.x = move_input * absf(ledge_climb_raycast.position.x)
+		ledge_climb_raycast.target_position.x = move_input * absf(ledge_climb_raycast.target_position.x)
+		ledge_climb_raycast.force_raycast_update()
+		
 	velocity.x = move_input * WALK_VELOCITY
 	
 	#if Input.is_action_just_pressed("Attack"):
@@ -103,7 +111,6 @@ func take_damage(Damage: int):
 	health_changed.emit(health)
 	if health <= 0:
 		animated_sprite.play('Death')
-		alive = false
 
 func handle_sprite_direction() -> void:
 	if velocity.x > 0:
@@ -157,6 +164,12 @@ func change_state(state: STATE):
 			animated_sprite.play("Float")
 			print("Create Float Animation")
 			velocity.y = 0
+		
+		STATE.LEDGE_CLIMB:
+			animated_sprite.play("LedgeClimb")
+			velocity = Vector2.ZERO
+			global_position.y = ledge_climb_raycast.get_collision_point().y
+			can_double_jump = true
 
 func process_state(delta):
 	match active_state: 
@@ -210,3 +223,16 @@ func process_state(delta):
 			
 		STATE.LEDGE_JUMP:
 			pass
+
+func is_input_toward_facing() -> bool:
+	return signf(Input.get_axis("Move_left","Move_right")) == facing_direction
+
+func is_ledge() -> bool:
+	return is_on_wall_only() and ledge_climb_raycast.is_colliding() and ledge_climb_raycast.get_collision_normal().is_equal_approx(Vector2.UP)
+
+func is_space() -> bool:
+	ledge_space_ray_cast.global_position = ledge_climb_raycast.get_collision_point()
+	ledge_space_ray_cast.force_raycast_update()
+	return not ledge_space_ray_cast.is_colliding()
+
+#func ledge_clim
