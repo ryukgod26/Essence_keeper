@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://l8py0qbyc5ko"]
+[gd_scene load_steps=11 format=3 uid="uid://l8py0qbyc5ko"]
 
 [ext_resource type="Script" uid="uid://0fur8xuqo568" path="res://Scripts/options.gd" id="1_prnvy"]
 [ext_resource type="Script" uid="uid://bqc64vk42n4y4" path="res://Scripts/HSlider.gd" id="2_4tmxy"]
@@ -16,17 +16,26 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kftxf"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Options" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_663nc"]
+bg_color = Color(0.6857422, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvj8k"]
+bg_color = Color(0.44895673, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qyyw6"]
+
+[node name="Options" type="CanvasLayer"]
 script = ExtResource("1_prnvy")
 
 [node name="TabContainer" type="TabContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -112,8 +121,23 @@ horizontal_alignment = 1
 layout_mode = 2
 script = ExtResource("2_4tmxy")
 
+[node name="Back" type="Button" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_663nc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hvj8k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_663nc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qyyw6")
+text = "Back"
+
 [connection signal="item_selected" from="TabContainer/Video/Resolution" to="." method="_on_resolution_item_selected"]
 [connection signal="item_selected" from="TabContainer/Video/Mode" to="." method="_on_mode_item_selected"]
 [connection signal="value_changed" from="TabContainer/Audio/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/SfxVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

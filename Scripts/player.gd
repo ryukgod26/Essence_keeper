@@ -32,6 +32,7 @@ const JUMP_DEACCELERATION = 1500.
 const DOUBLE_JUMP_VELOCITY := -450.
 const FLOAT_GRAVITY := 200.
 const FLOAT_VELOCITY := 100.
+const LEDGE_JUMP_VELOCITY := -500.
 
 var Enemies = []
 signal health_changed(Health:int)
@@ -168,9 +169,13 @@ func change_state(state: STATE):
 		STATE.LEDGE_CLIMB:
 			animated_sprite.play("LedgeClimb")
 			velocity = Vector2.ZERO
-			global_position.y = ledge_climb_raycast.get_collision_point().y
+			#global_position.y = ledge_climb_raycast.get_collision_point().y
 			can_double_jump = true
-
+		
+		STATE.LEDGE_JUMP:
+			animated_sprite.play("DoubleJump")
+			velocity.y = LEDGE_JUMP_VELOCITY
+		
 func process_state(delta):
 	match active_state: 
 		STATE.FALL:
@@ -186,6 +191,8 @@ func process_state(delta):
 					change_state(STATE.DOUBLE_JUMP)
 				else:
 					change_state(STATE.FLOAT)
+			elif is_input_toward_facing() and is_ledge() and is_space():
+				change_state(STATE.LEDGE_CLIMB)
 			
 		STATE.FLOOR:
 			if Input.get_axis("Move_left","Move_right"):
@@ -201,13 +208,13 @@ func process_state(delta):
 				change_state(STATE.JUMP)
 	
 		
-		STATE.JUMP, STATE.DOUBLE_JUMP:
+		STATE.JUMP, STATE.DOUBLE_JUMP, STATE.LEDGE_JUMP:
 			velocity.y = move_toward(velocity.y,0,JUMP_DEACCELERATION * delta)
 			move_logic()
 			if Input.is_action_just_released("Jump") or velocity.y >= 0:
 				velocity.y = 0
 				change_state(STATE.FALL)
-			
+			 
 		STATE.FLOAT:
 			velocity.y = move_toward(velocity.y,FLOAT_VELOCITY,FLOAT_GRAVITY * delta)
 			move_logic()
@@ -217,15 +224,53 @@ func process_state(delta):
 			elif Input.is_action_just_released("Jump"):
 				float_cooldown.start()
 				change_state(STATE.FALL)
+			elif is_input_toward_facing() and is_ledge() and is_space():
+				change_state(STATE.LEDGE_CLIMB)
 			
 		STATE.LEDGE_CLIMB:
-			pass
+			#if not animated_sprite.is_playing():
+				#animated_sprite.play("Idle")
+				#var offset := ledge_climb_offset()
+				#offset.x *= facing_direction
+				#position += offset
+				#change_state(STATE.FLOOR)
+			if animated_sprite.frame_progress < 0.5:
+			# During first half of animation, move up and forward
+				var ledge_point = ledge_climb_raycast.get_collision_point()
+				var target_pos = calculate_ledge_target_position(ledge_point)
+				global_position = global_position.lerp(target_pos, delta * 10.0)
+			
+			if not animated_sprite.is_playing():
+				animated_sprite.play("Idle")
+				change_state(STATE.FLOOR)
+			
+			if Input.is_action_just_pressed("Jump"):
+				var progress := inverse_lerp(0, animated_sprite.sprite_frames.get_frame_count("LedgeClimb"),animated_sprite.frame)
+				var offset := ledge_climb_offset()
+				offset.x *= facing_direction * progress
+				position += offset
+				change_state(STATE.LEDGE_JUMP)
+				
 			
 		STATE.LEDGE_JUMP:
 			pass
 
 func is_input_toward_facing() -> bool:
 	return signf(Input.get_axis("Move_left","Move_right")) == facing_direction
+
+func calculate_ledge_target_position(ledge_point: Vector2) -> Vector2:
+	var shape := collision_shape.shape
+	var offset_x = 0.0
+	var offset_y = 0.0
+	
+	if shape is CapsuleShape2D:
+		offset_x = (shape.radius + 2.0) * facing_direction  # Slightly past the wall
+		offset_y = -shape.height * 0.5 - collision_shape.position.y  # Stand on top
+	elif shape is RectangleShape2D:
+		offset_x = (shape.size.x * 0.5 + 2.0) * facing_direction
+		offset_y = -shape.size.y * 0.5 - collision_shape.position.y
+	
+	return Vector2(ledge_point.x + offset_x, ledge_point.y + offset_y)
 
 func is_ledge() -> bool:
 	return is_on_wall_only() and ledge_climb_raycast.is_colliding() and ledge_climb_raycast.get_collision_normal().is_equal_approx(Vector2.UP)
@@ -235,4 +280,16 @@ func is_space() -> bool:
 	ledge_space_ray_cast.force_raycast_update()
 	return not ledge_space_ray_cast.is_colliding()
 
-#func ledge_clim
+func ledge_climb_offset() -> Vector2:
+	var shape := collision_shape.shape
+	var ledge_top_y = ledge_climb_raycast.get_collision_point().y
+	if shape is CapsuleShape2D:
+		#return Vector2(shape.radius * 2., -shape.height * 0.5)
+		var y_offset = ledge_top_y - global_position.y + collision_shape.position.y
+		return Vector2(shape.radius * 2.5, y_offset)
+	if shape is RectangleShape2D:
+		#return Vector2(shape.size.x, -shape.size.y * 0.5)
+		var y_offset = ledge_top_y - global_position.y + collision_shape.position.y
+		return Vector2(shape.size.x * 1.2, y_offset)
+	print("Player Collision Shape is neither Capsule nor Rectangle`")
+	return Vector2.ZERO
